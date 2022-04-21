@@ -8,6 +8,7 @@ import helmet from "helmet";
 import userRoute from "./modules/user/user.route";
 import authRoute from "./modules/auth/auth.route";
 import { Request, Response } from "express";
+import deserialize from "./middleware/deserializeUser";
 
 const PORT = process.env.PORT || 4000;
 
@@ -22,9 +23,10 @@ app.use(
   })
 );
 app.use(helmet());
-
+app.use(deserialize);
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
+
 const server = app.listen(PORT, async () => {
   await connectToDatabase();
   console.log(`Server listening at http://localhost:${PORT}`);
