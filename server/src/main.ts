@@ -7,6 +7,7 @@ import CORS_ORIGIN from "constants";
 import helmet from "helmet";
 import userRoute from "./modules/user/user.route";
 import authRoute from "./modules/auth/auth.route";
+import videoRoute from "./modules/videos/video.route";
 import { Request, Response } from "express";
 import deserialize from "./middleware/deserializeUser";
 
@@ -26,6 +27,7 @@ app.use(helmet());
 app.use(deserialize);
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/videos", videoRoute);
 
 const server = app.listen(PORT, async () => {
   await connectToDatabase();

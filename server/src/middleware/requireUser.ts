@@ -7,7 +7,6 @@ function requireUser(req: Request, res: Response, next: NextFunction) {
     return res.send(StatusCodes.FORBIDDEN);
   }
 
-  console.log(`user is ${user}`);
   return next();
 }
 
