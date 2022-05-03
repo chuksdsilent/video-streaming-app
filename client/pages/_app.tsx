@@ -14,6 +14,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page) => page);
   return (
@@ -33,11 +34,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         }}
       >
         <NotificationsProvider>
+          <QueryClientProvider client={queryClient}>
           {getLayout(
             <main>
               <Component {...pageProps} />
             </main>
           )}
+          </QueryClientProvider>
         </NotificationsProvider>
       </MantineProvider>
     </>
